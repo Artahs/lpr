@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<main>
+		<section style="padding-top:10%">
+			<div class="block-filtre p-2">
+				<div>
+					<h2>Bienvenue sur notre boutique!</h2>
+					<p>Retrouvez ici la liste de nos articles uniques et originaux!</p>
+					<div>
+						<p>
+							<b>Filtrer:</b>
+						</p>
+						<div class="filtre">
+							<a style="color:white;" href="{{ path('app_produit_index_list') }}">Tous les produits</a>
+							{% for categorie in categories %}
+								<a style="color:white;" href="{{ path('app_produit_index_list', {'categorie_name': categorie.nom}) }}">{{ categorie.nom }}</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<div class="block-filtre-droite">
+					<a href="{{ path('app_produit_index') }}">
+						<lord-icon src="https://cdn.lordicon.com/jgnvfzqg.json" trigger="hover" colors="primary:#ffffff" style="width:48px;height:48px"></lord-icon>
+					</a>
+				</div>
+			</div>
+			<div>
+				{% if is_granted('ROLE_ADMIN') %}
+					<button class="Btn-add mx-4">
+						<div class="sign">+</div>
+						<a class="text" href="{{ path('app_produit_new') }}">Ajouter</a>
+					</button>
+				{% endif %}
+			</div>
+			<div class="container">
+				<div id="productsContainer" class="justify-content-center">
+					{% for produit in produits %}
+						<div class="list-card">
+							<div class="list-card-img" style="background-image: url({{asset(produit.image)}});"></div>
+							<div class="list-card-txt">
+								<div class="list-card-txt">
+									<p class="list-card-titre">{{produit.nom}}</p>
+									<span class="list-card-prix">{{produit.prix}}€</span>
+								</div>
+								<a class="list-card-btn" href="{{ path('app_produit_show', {'id': produit.id}) }}">En savoir plus</a>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</section>
+	</main>
+	{{ include('footer.html.twig') }}
+{% endblock %}

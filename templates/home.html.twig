@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<div id="container">
+		<video id="background_video" src="{{asset('/video/night.mp4')}}" loop muted autoplay></video>
+		<section id="main_content"></section>
+	</div>
+	{# <script type="module" src="{{asset('js/app.js')}}"></script> #}
+	{# <div style="overflow:hidden;">
+							<video width="100%" height="100%" muted autoplay>
+								<source src="{{ asset('video/night.mp4') }}" type="video/mp4">
+							</video>
+						</div> #}
+{% endblock %}

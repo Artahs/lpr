@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<main>
+		<section style="padding-top:10%">
+			<div class="block-filtre p-2">
+				<div>
+					<h2>Bienvenue sur notre boutique!</h2>
+					<p>Retrouvez ici la liste de nos articles uniques et originaux!</p>
+					<div>
+						<p>
+							<b>Filtrer:</b>
+						</p>
+						<div class="filtre">
+							<a style="color:white;" href="{{ path('app_produit_index') }}">Tous les produits</a>
+							{% for categorie in categories %}
+								<a style="color:white;" href="{{ path('app_produit_index', {'categorie_name': categorie.nom}) }}">{{ categorie.nom }}</a>
+							{% endfor %}
+						</div>
+					</div>
+				</div>
+				<div class="block-filtre-droite">
+					<a href="{{ path('app_produit_index_list') }}">
+						<lord-icon src="https://cdn.lordicon.com/ipnwkgdy.json" trigger="hover" colors="primary:#ffffff" style="width:48px;height:48px"></lord-icon>
+					</a>
+				</div>
+			</div>
+			<div>
+				{% if is_granted('ROLE_ADMIN')%}
+					<button class="Btn-add mx-4">
+
+						<div class="sign">+</div>
+
+						<a class="text" href="{{ path('app_produit_new') }}">Ajouter</a>
+					</button>
+				{% endif %}
+
+			</div>
+			<div class="container">
+				<div id="productsContainer" class="row row-gap-2 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 justify-content-center">
+					{% for produit in produits %}
+						<div class="card-product m-5">
+							<div class="top-card-product" style="background-image: url({{asset(produit.image)}});"></div>
+							<div class="bottom-card-product">
+								<div class="card-content-product">
+									<span class="card-title-product">{{produit.nom}}</span>
+									<p class="card-txt-product">{{produit.prix}}€</p>
+									<a class="card-btn-product" href="{{ path('app_produit_show', {'id': produit.id}) }}">En savoir plus</a>
+								</div>
+							</div>
+						</div>
+						{% else %}
+					{% endfor %}
+				</div>
+			</div>
+			{# <table class="table">
+																																													<thead>
+																																														<tr>
+																																															<th>Id</th>
+																																															<th>Nom</th>
+																																															<th>Description</th>
+																																															<th>Prix</th>
+																																															<th>Image</th>
+																																															<th>actions</th>
+																																														</tr>
+																																													</thead>
+																																													<tbody>
+																																														{% for produit in produits %}
+																																															<tr>
+																																																<td>{{ produit.id }}</td>
+																																																<td>{{ produit.nom }}</td>
+																																																<td>{{ produit.description }}</td>
+																																																<td>{{ produit.prix }}</td>
+																																																<td>{{ produit.image }}</td>
+																																																<td>
+																																																	<a href="{{ path('app_produit_show', {'id': produit.id}) }}">show</a>
+																																																	<a href="{{ path('app_produit_edit', {'id': produit.id}) }}">edit</a>
+																																																</td>
+																																															</tr>
+																																														{% else %}
+																																															<tr>
+																																																<td colspan="5">no records found</td>
+																																															</tr>
+																																														{% endfor %}
+																																													</tbody>
+																																												</table> #}
+		</section>
+	</main>
+	{{ include('footer.html.twig') }}
+{% endblock %}

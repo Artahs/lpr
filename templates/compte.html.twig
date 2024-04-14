@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+	<main>
+		<section class="container produit-section">
+			<div class="mt-5 d-flex justify-content-between">
+				<div>
+					<h3>{{app.user.userIdentifier}}</h3>
+					<p>{{app.user.pseudo}}</p>
+				</div>
+				<div>
+					<a class="btn-deco" href="{{ path('app_logout') }}">Deconnexion</a>
+				</div>
+			</div>
+			<div class="mt-5">
+				<a class="btn-compte" href="{{ path('panier')}}">Voir mon panier</a>
+			</div>
+		</section>
+	</main>
+	{{ include('footer.html.twig') }}
+{% endblock %}

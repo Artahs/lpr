@@ -1,0 +1,69 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block body %}
+	<section class="d-flex flex-column h-100">
+		<div class="container log-form text-color-white">
+			<h1>Creer votre compte</h1>
+
+			<div class="d-flex justify-content-center">{{ form_errors(registrationForm) }}
+
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.pseudo)}}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.plainPassword, {
+            label: 'Mot de passe'
+        }) }}
+				{{ form_row(registrationForm.agreeTerms,{
+                label: "Accepter les conditions d'utilisation"}
+                ) }}
+
+				<button type="submit" class="btn bg-primary">S'inscrire</button>
+				{{ form_end(registrationForm) }}</div>
+		</div>
+		<div class="container d-flex justify-content-center">
+			<p>Vous avez déjà compte?
+				<a href="{{path('app_login')}}">Connectez-vous !</a>
+			</p>
+		</div>
+	</section>
+	{{ include('footer.html.twig') }}
+{% endblock %} #}
+{% extends 'base.html.twig' %}
+
+{% block title %}LPR{% endblock %}
+
+{% block body %}
+    <section class="d-flex flex-column h-100">
+        <div class="container log-form text-color-white">
+            <h1>Créer votre compte</h1>
+
+            <div class="d-flex justify-content-center" style="color:white;">
+                {{ form_start(registrationForm, {'attr': {'class': 'needs-validation', 'novalidate': 'novalidate'}}) }}
+                {{ form_errors(registrationForm) }}
+
+                <div class="mb-3">
+                    {{ form_row(registrationForm.pseudo, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_row(registrationForm.plainPassword, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-check mb-3">
+                    {{ form_row(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+                </div>
+
+                <button type="submit" class="m-2 btn btn-lg btn-primary" style="color;white;">S'inscrire</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+        <div class="container d-flex justify-content-center">
+            <p>Vous avez déjà un compte? <a href="{{ path('app_login') }}">Connectez-vous !</a></p>
+        </div>
+    </section>
+    {{ include('footer.html.twig') }}
+{% endblock %}
